@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/xmlstyle.xsl"?>
+<fragenkatalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema_fragenkatalog.xsd" name="one" fragenanzahl="1">
+	<fragenblock timeout="25">
+		<frage>Welcher Mechanismus kann unter Unix zur Kommunikation über das Netzwerk verwendet werden?</frage>
+		<antwort korrekt="true">Sockets</antwort>
+		<antwort korrekt="false">Message Queues</antwort>
+		<antwort korrekt="false">Pipes</antwort>
+		<antwort korrekt="false">Semaphore</antwort>
+	</fragenblock>
+</fragenkatalog>

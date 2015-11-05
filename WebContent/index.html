@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>QUIZ</title>
+		
+		<!-- Bootstrap -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    	
+ 		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+		<!-- CSS Datei -->
+		<link href="assets/css/index.css" rel="stylesheet">
+		
+    	<!--JavaScript-->
+		<script type="text/javascript" src="assets/js/changeStyle.js"></script>
+		
+	</head>
+	<body>
+		<header class="page_header">
+			<div>
+				<h1>
+					<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+					<span>WebQuiz</span>
+				</h1>
+			</div>
+		</header>
+
+		<div class="content">
+			<div class="playground" style="float:left">
+				<label>
+					Name:
+					<input class="textbox" type="text" name="name" size="30" maxlength="30">
+				</label>
+				<br>
+				<input class="loginbutton" type="submit" value="Login" />
+			</div>
+			<div class="catalogs" style="float:right">
+				<h4>
+				<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                <span>Catalogs</span>
+                </h4>
+                <hr/>
+			</div>
+			<br>
+			<div class="highscore" style="float:right">
+				<h4>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span>Highscore</span>
+                </h4>
+                <hr/>
+                <table id="highscoreTable" class="table table-hover">
+          		<thead>
+               		<tr>
+                    	<td>#</td>
+                  		<td>Player</td>
+        				<td>Score</td>
+         			</tr>
+				</thead>
+				<tbody id="tablePlayerlistBody">
+					<tr>
+						<td>keine Spieler</td>
+						<td></td>
+						<td></td>								
+					</tr>
+               </tbody>
+               </table>
+			</div>
+		</div>
+		
+		<footer>
+		 	<hr/>
+				<input class="loginbutton" type="button" onclick="changeStyleStandard()" value="Standard">
+				<input class="loginbutton" type="button" onclick="changeStyleHalloween()" value="Halloween">
+				<input class="loginbutton" type="button" onclick="changeStyleChristmas()" value="Christmas">
+				<br/>
+			 Gruppe: Stroh, Strohm, Steinbinder
+		</footer>
+	</body>
+</html>

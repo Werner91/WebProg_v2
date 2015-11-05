@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/xmlstyle.xsl"?>
+<fragenkatalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema_fragenkatalog.xsd" name="simple" fragenanzahl="6">
+	<fragenblock>
+		<frage>Welcher Mechanismus kann unter Unix zur Kommunikation über das Netzwerk verwendet werden?</frage>
+		<antwort korrekt="true">Sockets</antwort>
+		<antwort korrekt="false">Message Queues</antwort>
+		<antwort korrekt="false">Pipes</antwort>
+		<antwort korrekt="false">Semaphore</antwort>
+	</fragenblock>
+	<fragenblock>
+		<frage>Die Hauptstadt von Italien ist:</frage>
+		<antwort korrekt="true">Rom</antwort>
+		<antwort korrekt="false">Athen</antwort>
+		<antwort korrekt="false">Bonn</antwort>
+		<antwort korrekt="false">Madrid</antwort>
+	</fragenblock>
+	<fragenblock>
+		<frage>Die Quadratwurzel von 100 ist:</frage>
+		<antwort korrekt="true">10</antwort>
+		<antwort korrekt="false">2,76</antwort>
+		<antwort korrekt="false">5</antwort>
+		<antwort korrekt="false">1</antwort>
+	</fragenblock>
+	<fragenblock>
+		<frage>1+1=?</frage>
+		<antwort korrekt="true">2</antwort>
+		<antwort korrekt="false">11</antwort>
+		<antwort korrekt="false">17</antwort>
+		<antwort korrekt="false">3</antwort>
+	</fragenblock>
+	<fragenblock>
+		<frage>Spinnen...</frage>
+		<antwort korrekt="true">...haben 8 Beine</antwort>
+		<antwort korrekt="false">...sind Insekten</antwort>
+		<antwort korrekt="false">...sind Vögel</antwort>
+		<antwort korrekt="false">...werden bis zu 100 Jahre alt</antwort>
+	</fragenblock>
+	<fragenblock>
+		<frage>Die Hauptstadt von Spanien ist:</frage>
+		<antwort korrekt="true">Madrid</antwort>
+		<antwort korrekt="false">Barcelona</antwort>
+		<antwort korrekt="false">Rom</antwort>
+		<antwort korrekt="false">London</antwort>
+	</fragenblock>
+</fragenkatalog>

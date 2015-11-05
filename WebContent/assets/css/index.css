@@ -84,3 +84,13 @@ footer {
 hr{
 	border-color: grey;
 }
+
+
+
+.laufschriftHeadline{
+	background-color:transparent;
+	border: none;
+	width: 200px;
+	
+}
+

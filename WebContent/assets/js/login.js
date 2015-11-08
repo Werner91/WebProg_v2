@@ -13,6 +13,13 @@ function startbutton_enable(){
 }
 
 
+function changePlayerPosition(event){
+	var tr = this.parentNode;
+	var playerlist = document.getElementById("tablePlayerlistBody");
+	playerlist.insertBefore(tr,playerlist.firstChild);
+}
+
+
 
 function addPlayerToTable(){
 	var playername = document.getElementById("loginbox").value;//spielername aus dem Textfeld auslesen
@@ -25,13 +32,17 @@ function addPlayerToTable(){
 			alert("Es wurde kein Name angegeben. Bitte geben Sie einen Spielernamen ein.");
 		}else{
 			var tr = document.createElement("tr");
+			
 			var td1 = document.createElement("td");
-			//var td2 = document.createElement("td");
+			var td2 = document.createElement("td");
+			
 			var playernameText = document.createTextNode(playername);
 			
 			td1.appendChild(playernameText);
+			
 			tr.appendChild(td1);
-			//tr.appendChild(td2);
+			tr.appendChild(td2);
+			
 			playerlist.appendChild(tr);
 			
 			playercount++;
@@ -42,5 +53,8 @@ function addPlayerToTable(){
 	}else{
 		alert("Maximale Spieleranzahl erreicht.");
 	}
+	
+	td1.addEventListener("click", changePlayerPosition, false);
+	td1.parameter = playername;
 	
 }

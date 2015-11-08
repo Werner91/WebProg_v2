@@ -15,10 +15,13 @@ function catalogs(){
 	catalogSimple.parameter = "simple";
 	catalogSysProg.addEventListener("click", changeBackgroundColorOnClick, false);
 	catalogSysProg.parameter = "sysprog";
-
-	
-	
 }
+
+
+
+
+
+
 
 
 function changeBackgroundColorOnClick(event){

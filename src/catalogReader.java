@@ -3,8 +3,14 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
+
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
+
+/*
+import org.jdom.*;
+import org.jdom.input.SAXBuilder;
+*/
 
 /**
  * Webprogrammierung Praktikum - Aufgabe 2
@@ -18,18 +24,6 @@ public class catalogReader{
 	
 	// Liste verwaltet die XML-Dateien (Fragenkataloge)
 		private ArrayList<Document> xmlDocuments;
-		
-		
-	/*
-	public catalogReader() throws JDOMException, IOException{
-		//Document doc = new SAXBuilder().build( "C:/Users/Werner/Desktop/AI 5.Semester/WebProg/WebProg/catalogs/one.xml" );
-		Element katalog = doc.getRootElement();
-		Element fargenblock = katalog.getChild("fragenblock");
-		Element frage = fargenblock.getChild("frage");
-		System.out.println(frage);
-	}
-	*/
-		
 		
 		
 	/**

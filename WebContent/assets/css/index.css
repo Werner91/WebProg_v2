@@ -38,6 +38,7 @@ body{
   	height: auto;
     padding:280px;
     margin-left: 3%;
+    float: left;
 }
 
 .textbox{

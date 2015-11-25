@@ -76,6 +76,7 @@
                 <table id="catalogtable">
                 	<tbody>		
                 		
+                		
 						<% String[] catalogList = Quiz.getInstance().getCatalogList().keySet().toArray(new String[0]);
 							// display available catalogs 
 							for(int i = 0; i < catalogList.length; i++){%>

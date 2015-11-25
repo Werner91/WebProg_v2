@@ -111,12 +111,10 @@ public class FilesystemLoader implements CatalogLoader {
         for(String filename : files){
         	try {
         		if(isXMLFile(filename)){
-        			xmlDocuments.add(new SAXBuilder().build(filename));
+        			xmlDocuments.add(new SAXBuilder().build(filename)); //Einlesen der XML Dateien. Parsen der Datei in ein JDOM 2 Dokument
         		}
         	} catch(Exception ex){
-        		System.out.println("Es wurden Dateien gefunden die nicht vom typ XML sind.");
-        		ex.printStackTrace();
-        		
+        		ex.printStackTrace();   		
         	}
         }    	
            	
@@ -159,7 +157,7 @@ public class FilesystemLoader implements CatalogLoader {
 
 	    // suche letzten '.' im Dateinamen
 	    int i = xmlFile.lastIndexOf('.');
-	    // sofern Punkt vorhanden, String zurecht schneiden
+	    // sofern Punkt vorhanden, String zurecht schneiden / nur noch die endung wird betrachtet
 	    if (i > 0) {
 	    	extension = xmlFile.substring(i+1);
 	    }

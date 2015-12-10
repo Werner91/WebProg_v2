@@ -38,6 +38,7 @@ body{
   	height: auto;
     padding:280px;
     margin-left: 3%;
+    float: left;
 }
 
 .textbox{
@@ -91,6 +92,13 @@ hr{
 	background-color:transparent;
 	border: none;
 	width: 200px;
-	
+}
+
+.catalogName{
+	font-size: 1.125em;
+	padding-bottom: 2%;
+	padding-top: 2%;
+	width: 1%;
+	border-radius: 5px;
 }
 

@@ -1,3 +1,4 @@
+/*
 var playercount = 0;
 
 function startbutton_disable(){
@@ -58,3 +59,4 @@ function addPlayerToTable(){
 	td1.parameter = playername;
 	
 }
+*/

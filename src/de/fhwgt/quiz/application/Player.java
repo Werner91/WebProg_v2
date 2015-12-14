@@ -1,8 +1,11 @@
 package de.fhwgt.quiz.application;
 
+
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.websocket.Session;
 
 import de.fhwgt.quiz.error.QuizError;
 import de.fhwgt.quiz.error.QuizErrorType;
@@ -29,6 +32,8 @@ public class Player {
     private int questionIndex = -1;
     private List<Question> questions;
     private TimerTask timeoutTask;
+    
+    private Session session;
 
     /**
      * Constructs a new player with the given name.
@@ -234,5 +239,13 @@ public class Player {
         long timeLeft = Math.max(timeout - timeTaken, 0);
         long score = (timeLeft * 1000) / timeout;
         return ((score + 5) / 10) * 10;
+    }
+    
+    public void setSession(Session session){
+    	this.session = session;
+    }
+    
+    public Session getSession(){
+    	return this.session;
     }
 }

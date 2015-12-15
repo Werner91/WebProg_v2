@@ -14,16 +14,6 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
-
-/*
-import org.jdom.*;
-import org.jdom.input.SAXBuilder;
-*/
-
 import de.fhwgt.quiz.application.Catalog;
 import de.fhwgt.quiz.application.Question;
 
@@ -72,8 +62,8 @@ public class FilesystemLoader implements CatalogLoader {
 
         // Construct URL for package location
         URL url = this.getClass().getClassLoader().getResource(location);
+
         File dir;
-        
         try {
             // Make sure the Java package exists
             if (url != null) {
@@ -87,8 +77,6 @@ public class FilesystemLoader implements CatalogLoader {
         }
 
         // Add catalog files
-        
-        /*
         if (dir.exists() && dir.isDirectory()) {
             this.catalogDir = dir.listFiles(new CatalogFilter());
             for (File f : catalogDir) {
@@ -96,81 +84,10 @@ public class FilesystemLoader implements CatalogLoader {
                     new Catalog(f.getName(), new QuestionFileLoader(f)));
             }
         }
-        */
-        
-        
-        String path = "C:\\Users\\Werner\\Desktop\\AI_5.Semester\\WebProg\\HTML_CSS_Workspace\\WebProg_v2\\catalogs";
-        
-        File catalogFolder = new File(path);    
-        String[] files = listFilesInfolder(catalogFolder);
-
-    	// Liste verwaltet die XML-Dateien (Fragenkataloge)
-        ArrayList<Document> xmlDocuments = new ArrayList<Document>();    	
-        
-        // fuege XML-Dateien (Fragekataloge) zur ArrayList hinzu
-        for(String filename : files){
-        	try {
-        		if(isXMLFile(filename)){
-        			xmlDocuments.add(new SAXBuilder().build(filename)); //Einlesen der XML Dateien. Parsen der Datei in ein JDOM 2 Dokument
-        		}
-        	} catch(Exception ex){
-        		ex.printStackTrace();   		
-        	}
-        }    	
-           	
-       	// fuege Kataloge aus der ArrayList der Katalogverwaltung hinzu
-        for(Document doc : xmlDocuments){
-        	Element fragenkatalog = doc.getRootElement();
-        	// catalogs.put(fragenkatalog.getAttributeValue("name"), new Catalog(fragenkatalog.getAttributeValue("name"), new QuestionFileLoader(doc)));
-        	catalogs.put(fragenkatalog.getAttributeValue("name"), new Catalog(fragenkatalog.getAttributeValue("name"), null));
-        }
 
         return catalogs;
     }
 
-    
-    /**
-     * Methode liest vorhandene Dateien in einem Verzeichnis aus 
-     * @param folder Verzeichnis in dem die Fragenkataloge liegen
-     * @return Stringarray mit den im uebergeben Verzeichnis enthaltenen Dateiname (Dateien)
-     */
-    private String[] listFilesInfolder(File folder) {
-    ArrayList<String> fileList = new ArrayList<String>();
-    // fuege der Liste alle Dateien aus dem Verzeichnis hinzu
-    	for (File fileEntry : folder.listFiles()) {
-    		fileList.add(fileEntry.getAbsolutePath());
-    	}
-    	return fileList.toArray(new String[fileList.size()]);
-    }    
-    
-    
-    
-    
-    
-    /**
-    * Methode ueberprueft anhand der Dateiendung ob es sich um eine XML-Datei handelt
-    * @param xmlFile zu pruefende Datei
-    * @return true falls XML-Datei
-    */
-    private boolean isXMLFile(String xmlFile) {
-    	String extension = "";
-
-	    // suche letzten '.' im Dateinamen
-	    int i = xmlFile.lastIndexOf('.');
-	    // sofern Punkt vorhanden, String zurecht schneiden / nur noch die endung wird betrachtet
-	    if (i > 0) {
-	    	extension = xmlFile.substring(i+1);
-	    }
-	    // pruefe Dateieindung
-	    if(extension.equals("xml")){
-	    	return true;			
-	    } else {
-	    	return false;	
-	    }
-    }
-    
-    
-    
     @Override
     public Catalog getCatalogByName(String name) throws LoaderException {
         if (catalogs.isEmpty()) {

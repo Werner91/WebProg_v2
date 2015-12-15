@@ -8,8 +8,6 @@ import de.fhwgt.quiz.error.QuizError;
 import de.fhwgt.quiz.error.QuizErrorType;
 import de.fhwgt.quiz.loader.CatalogLoader;
 import de.fhwgt.quiz.loader.LoaderException;
-import de.fhwgt.quiz.loader.FilesystemLoader;
-
 
 /**
  * Quiz class implemented as a singleton for easy access.
@@ -241,18 +239,12 @@ public class Quiz {
      * @return Catalog loader instance
      */
     private CatalogLoader getCatalogLoader() {
-        /*
-    	if (this.loader == null) {
+        if (this.loader == null) {
             throw new IllegalStateException(
                 "Catalog loader must be initialized first");
         } else {
             return this.loader;
         }
-        */
-    	if (this.loader == null) {
-    		this.loader = new FilesystemLoader("catalogs");
-    	}
-    	return this.loader;
     }
 
     /**

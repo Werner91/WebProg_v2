@@ -32,14 +32,15 @@ function ajaxServerCatalogResponse(){
 	console.log("received catalogs");
 	// State 4 - die Antwort des Servers liegt vollständig vor
 	if(request.readyState == 4){
-		var answer = request.responseXML.getElementsByTagName("name");
+		var answer = request.responseXML.getElementsByTagName("catalogName");
 		for(var i = 0; i < answer.length; i++){
+			console.log("Catalogs" + 1);
 			// erzeuge div mit Text, weise CSS-Klasse hinzu
 			var catalogDiv = document.createElement("div");
 			catalogDiv.className = "catalogList";
 			catalogDiv.textContent = answer[i].firstChild.nodeValue;
 			// füge div zum DOM-Baum hinzu + registriere EventListener
-			document.getElementById("catalogs").appendChild(catalogDiv);
+			document.getElementById("catalogName").appendChild(catalogDiv);
 			catalogDiv.addEventListener("click", clickedCatalog, false);
 		}
 	}

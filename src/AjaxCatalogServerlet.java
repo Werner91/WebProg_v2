@@ -35,8 +35,12 @@ public class AjaxCatalogServerlet extends HttpServlet {
     	
     	// get catalogs
     	try {
+    		
+    		System.out.println("vorher");
 			catalogList = Quiz.getInstance().getCatalogList().keySet().toArray(new String[0]);
-		} catch (LoaderException e) {
+			System.out.println(catalogList.length);
+			System.out.println("nachher");
+    	} catch (LoaderException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -1,5 +1,9 @@
 package de.fhwgt.quiz.loader;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
@@ -14,6 +18,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//import FilesystemLoader.QuestionFileLoader;
 import de.fhwgt.quiz.application.Catalog;
 import de.fhwgt.quiz.application.Question;
 
@@ -45,12 +50,13 @@ public class FilesystemLoader implements CatalogLoader {
     private final Pattern questionPattern = Pattern.compile(ANSWER_REGEX);
 
     private File[] catalogDir;
-    private final Map<String, Catalog> catalogs =
-        new HashMap<String, Catalog>();
+    private final Map<String, Catalog> catalogs = new HashMap<String, Catalog>();
     private final String location;
 
     public FilesystemLoader(String location) {
+    	System.out.println("filesystemlooooooader " + location);
         this.location = location;
+        
     }
 
     @Override
@@ -62,6 +68,8 @@ public class FilesystemLoader implements CatalogLoader {
 
         // Construct URL for package location
         URL url = this.getClass().getClassLoader().getResource(location);
+        
+        System.out.println(url);
 
         File dir;
         try {
@@ -76,6 +84,7 @@ public class FilesystemLoader implements CatalogLoader {
             dir = new File("/");
         }
 
+        /*
         // Add catalog files
         if (dir.exists() && dir.isDirectory()) {
             this.catalogDir = dir.listFiles(new CatalogFilter());
@@ -84,10 +93,82 @@ public class FilesystemLoader implements CatalogLoader {
                     new Catalog(f.getName(), new QuestionFileLoader(f)));
             }
         }
+		*/
+        
+        // catalog path on local machine
+        dir = new File("C:\\Users\\Werner\\Desktop\\AI_5.Semester\\WebProg\\HTML_CSS_Workspace\\WebProg_v2\\catalogs");
+        
+        // (used absolute path as tomcat integrated in eclipse does not uses projectfolder/WEB-INF/classes as 'root' path (like 
+        // later the Hochschule Tomcat), instead Tomcat program folder is used ("C:\Program Files (x86)\Tomcat\apache-tomcat-8.0.21-windows-x86\apache-tomcat-8.0.21\bin"))
+        
+        
+        // get file names
+        String[] files = listFilesInfolder(dir);
 
+    	// Liste verwaltet die XML-Dateien (Fragenkataloge)
+    	ArrayList<Document> xmlDocuments = new ArrayList<Document>();
+    	
+		// fuege XML-Dateien (Fragekataloge) zur ArrayList hinzu
+		for(String filename : files){
+			try {
+				if(isXMLFile(filename)){
+					xmlDocuments.add(new SAXBuilder().build(filename));
+				}
+			} catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}    	
+    	
+		// fuege Kataloge aus der ArrayList der Katalogverwaltung hinzu
+		for(Document doc : xmlDocuments){
+			Element fragenkatalog = doc.getRootElement();
+			catalogs.put(fragenkatalog.getAttributeValue("name"), new Catalog(fragenkatalog.getAttributeValue("name"), new QuestionFileLoader(doc)));
+		}
+        
+        
         return catalogs;
     }
 
+    
+    /**
+	 * Methode liest vorhandene Dateien in einem Verzeichnis aus 
+	 * @param folder Verzeichnis in dem die Fragenkataloge liegen
+	 * @return Stringarray mit den im uebergeben Verzeichnis enthaltenen Dateiname (Dateien)
+	 */
+	private String[] listFilesInfolder(File folder) {
+		ArrayList<String> fileList = new ArrayList<String>();
+    	// fuege der Liste alle Dateien aus dem Verzeichnis hinzu
+		for (File fileEntry : folder.listFiles()) {
+	    	fileList.add(fileEntry.getAbsolutePath());
+	    }
+	    return fileList.toArray(new String[fileList.size()]);
+	}    
+    
+
+	/**
+	 * Methode ueberprueft anhand der Dateiendung ob es sich um eine XML-Datei handelt
+	 * @param xmlFile zu pruefende Datei
+	 * @return true falls XML-Datei
+	 */
+	private boolean isXMLFile(String xmlFile) {
+		String extension = "";
+
+		// suche letzten '.' im Dateinamen
+		int i = xmlFile.lastIndexOf('.');
+		// sofern Punkt vorhanden, String zurecht schneiden
+		if (i > 0) {
+		    extension = xmlFile.substring(i+1);
+		}
+		// pruefe Dateieindung
+		if(extension.equals("xml")){
+			return true;			
+		} else {
+			return false;	
+		}
+	}
+    
+    
+    
     @Override
     public Catalog getCatalogByName(String name) throws LoaderException {
         if (catalogs.isEmpty()) {
@@ -120,11 +201,12 @@ public class FilesystemLoader implements CatalogLoader {
 
     private class QuestionFileLoader implements QuestionLoader {
 
-        private final File catalogFile;
+        //private final File catalogFile;
+        private final Document catalogDocument;
         private final List <Question> questions = new ArrayList<Question>();
 
-        public QuestionFileLoader(File file) {
-            catalogFile = file;
+        public QuestionFileLoader(Document file) {
+        	catalogDocument = file;
         }
         @Override
         public List<Question> getQuestions(Catalog catalog)
@@ -134,6 +216,9 @@ public class FilesystemLoader implements CatalogLoader {
                 return questions;
             }
 
+            Element fragenkatalog = catalogDocument.getRootElement();
+            
+            /*
             Scanner scanner;
             try {
                 scanner = new Scanner(catalogFile, "UTF-8");
@@ -171,6 +256,26 @@ public class FilesystemLoader implements CatalogLoader {
                     question.shuffleAnswers();
                     questions.add(question);
             }
+            */
+            
+            for(Element questionElement : fragenkatalog.getChildren()) {		
+				Question question = new Question(questionElement.getChildText("frage"));						
+				String timeout = questionElement.getAttributeValue("timeout");		
+				if(timeout == null){		
+					timeout = "10";							
+				}		
+				question.setTimeout(Long.parseLong(timeout));		
+				for(Element answer : questionElement.getChildren("antwort")) {							
+					if(answer.getAttributeValue("richtig").equals("true"))		
+						question.addAnswer(answer.getText());		
+					else		
+						question.addBogusAnswer(answer.getText());		
+				}		
+				questions.add(question);		
+			}   
+            
+            
+            
             return questions;
         }
 

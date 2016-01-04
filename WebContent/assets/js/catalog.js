@@ -29,12 +29,13 @@ function requestCatalogs(){
 function ajaxServerCatalogResponse(){
 
 	// States (0 - uninitialized, 1 - open, 2 - sent, 3 - receiving) werden nicht verarbeitet
-	console.log("received catalogs");
+	//console.log("received catalogs");
 	// State 4 - die Antwort des Servers liegt vollständig vor
 	if(request.readyState == 4){
+		console.log("received catalogs");
 		var answer = request.responseXML.getElementsByTagName("catalogName");
 		for(var i = 0; i < answer.length; i++){
-			console.log("Catalogs" + 1);
+			console.log("Catalogs" + i);
 			// erzeuge div mit Text, weise CSS-Klasse hinzu
 			var catalogDiv = document.createElement("div");
 			catalogDiv.className = "catalogList";

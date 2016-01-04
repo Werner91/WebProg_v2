@@ -1,5 +1,7 @@
 package de.fhwgt.quiz.application;
 
+import de.fhwgt.quiz.loader.FilesystemLoader;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.TimerTask;
@@ -239,12 +241,26 @@ public class Quiz {
      * @return Catalog loader instance
      */
     private CatalogLoader getCatalogLoader() {
-        if (this.loader == null) {
+        
+    	/*
+    	if (this.loader == null) {
             throw new IllegalStateException(
                 "Catalog loader must be initialized first");
         } else {
+        	System.out.println(this.loader);
             return this.loader;
         }
+        */
+    	
+    	
+    	if (this.loader == null) {
+    		
+    		this.loader = new FilesystemLoader("catalogs");
+    	}
+    	
+    	System.out.println(this.loader);
+    	return this.loader;
+    	
     }
 
     /**
@@ -263,6 +279,7 @@ public class Quiz {
      * @throws LoaderException If the catalogs could not be loaded
      */
     public Map<String, Catalog> getCatalogList() throws LoaderException {
+    	System.out.println("getCataloglist()");
         return getCatalogLoader().getCatalogs();
     }
 

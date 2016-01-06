@@ -212,12 +212,12 @@ public class FilesystemLoader implements CatalogLoader {
         public List<Question> getQuestions(Catalog catalog)
             throws LoaderException {
 
-            if (!questions.isEmpty()) {
-                return questions;
-            }
-
-            Element fragenkatalog = catalogDocument.getRootElement();
-            
+	            if (!questions.isEmpty()) {
+	                return questions;
+	            }
+	
+	            Element fragenkatalog = catalogDocument.getRootElement();
+	            
             /*
             Scanner scanner;
             try {
@@ -266,7 +266,7 @@ public class FilesystemLoader implements CatalogLoader {
 				}		
 				question.setTimeout(Long.parseLong(timeout));		
 				for(Element answer : questionElement.getChildren("antwort")) {							
-					if(answer.getAttributeValue("richtig").equals("true"))		
+					if(answer.getAttributeValue("korrekt").equals("true"))		
 						question.addAnswer(answer.getText());		
 					else		
 						question.addBogusAnswer(answer.getText());		

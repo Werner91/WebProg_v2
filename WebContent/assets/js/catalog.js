@@ -93,11 +93,10 @@ function highlichtChoosenCatalog(catalogName){
     for(var i = 0; i < catalogArray.length; i++) {
     	if(catalogArray[i].textContent == catalogName){
     		// hebe den aktiven Katalog vor
-    		console.log("bla");
-    		catalogArray[i].style.backgroundColor="#ffa500";
+    		catalogArray[i].style.backgroundColor="#ff4500";
     	} else {
     		// setze Farbe bei allen anderen Katalogen zurück
-    		catalogArray[i].style.backgroundColor="#f3f3f3";
+    		catalogArray[i].style.backgroundColor="#64797D";
     	}
     }
 }

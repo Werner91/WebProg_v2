@@ -67,25 +67,32 @@ public class Game {
     protected synchronized boolean start(QuizError error) {
 
         // Make sure preconditions are meet
+    	System.out.println("game.java zeile:68");
+    	
         if (isActive()) {
             error.set(QuizErrorType.GAME_IN_PROGRESS);
+            System.out.println("GAME_IN_PROGRESS game.java");
             return false;
         } else if (!hasCatalog()) {
             error.set(QuizErrorType.NO_CATALOG_SELECTED);
+            System.out.println("NO_CATALOG_SELECTED game.java");
             return false;
         }
 
         if (this.players.size() >= USER_MIN) {
+        	System.out.println("geeeeenuuuug spieler da");
             try {
                 assignQuestions();
             } catch (LoaderException e) {
                 error.set(QuizErrorType.CATALOG_LOAD_FAILED);
+                System.out.println("CATALOG_LOAD_FAILED game.java");
                 return false;
             }
             this.active = true;
             return true;
         } else {
             error.set(QuizErrorType.NOT_ENOUGH_PLAYERS);
+            System.out.println("NOT_ENOUGH_PLAYERS game.java");
             return false;
         }
     }
@@ -96,6 +103,7 @@ public class Game {
      * @return <code>true</code> if game is active; else <code>false</code>
      */
     public synchronized boolean isActive() {
+    	System.out.println("isActive game.java zeile: 105");
         return this.active;
     }
 
@@ -236,12 +244,15 @@ public class Game {
      *          catalog
      */
     private void assignQuestions() throws LoaderException {
+    	System.out.println("bevor get questions game.java 247");
         List<Question> questions = this.catalog.get().getQuestions();
+        System.out.println("nach get questions");
         Collections.shuffle(questions);
 
         for (Player player : players.values()) {
             player.setQuestions(questions);
         }
+        
     }
 
     /**
@@ -290,4 +301,8 @@ public class Game {
         lock.unlock();
     }
 
+    
+    public long getActivePlayerCount(){
+    	return this.activePlayers;
+    }
 }

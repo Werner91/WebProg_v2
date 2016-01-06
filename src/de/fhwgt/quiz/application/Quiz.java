@@ -162,11 +162,17 @@ public class Quiz {
      */
     public boolean startGame(Player player, QuizError error) {
         // Make sure only the superuser can start a game
-        if (!player.isSuperuser()) {
-            error.set(QuizErrorType.NOT_SUPERUSER);
-            return false;
+    	System.out.println("funktion startGame aufgerufen (quiz.java 165)");
+    	if (!player.isSuperuser()) {
+    		System.out.println("funktion startGame in if");
+    		error.set(QuizErrorType.NOT_SUPERUSER);
+    		System.out.println("funktion startGame in nach error sete");
+    		return false;
         }
+    	System.out.println("funktion startGame vor return (quiz.java 172)");
 
+    	//return true;
+    	System.out.println(error);
         return game.start(error);
     }
 

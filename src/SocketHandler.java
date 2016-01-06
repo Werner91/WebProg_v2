@@ -62,10 +62,12 @@ public class SocketHandler {
 		SocketJSONMessage sMessage = null;
 		try {
 			// erzeuge neues Nachrichtenobjekt und parse JSON-String
+
 			sMessage = new SocketJSONMessage(msg);	
+
 		} catch (JSONException e){
 			e.printStackTrace();
-			// send error nachticht an client
+			// send error nachricht an client
 			sendError(session, 0, "Fehlerhafte Nachricht erhalten!");
 		}
 		

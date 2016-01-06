@@ -22,14 +22,19 @@ public class SocketJSONMessage{
 	 */
 	public SocketJSONMessage(String JSONString) throws JSONException{
 		
+		System.out.println(JSONString);
+		
 		this.JSONString = JSONString;
+		
+		System.out.println(this.JSONString);
 		
 		//lege neues JSON Objekt an
 		JSONObject jObject = new JSONObject(this.JSONString);
 		
+		System.out.println(jObject.getInt("messageType"));
+		
 		//lese messageType aus
 		switch(jObject.getInt("messageType")){
-		
 			case 1: //LoginRequest
 				System.out.println("LoginRequest");
 				this.messageType = jObject.getInt("messageType");
@@ -38,10 +43,10 @@ public class SocketJSONMessage{
 			case 5: //CatalogChange
 				System.out.println("CatalogChange 1:" + jObject.getString("catalogName"));
 				this.messageType = jObject.getInt("messageType");
-				this.messageData[0] = jObject.get("catalogName");
+				this.messageData[0] = jObject.getString("catalogName");
 				break;
 			case 7: //StartGame
-				System.out.println("StartGame: " + jObject.getString("catalogName"));
+				System.out.println("StartGame:" + jObject.getString("catalogName"));
 				this.messageType = jObject.getInt("messageType");
 				this.messageData[0] = jObject.getString("catalogName");
 				break;
@@ -49,12 +54,13 @@ public class SocketJSONMessage{
 				System.out.println("QuestionRequest");
 				this.messageType = jObject.getInt("messageType");
 				break;
-			case 10: //QuestionAnswer
-				System.out.println("QuestionAnswer");
+			case 10: //QuestionAnswered
+				System.out.println("QuestionAnswered");
 				this.messageType = jObject.getInt("messageType");
 				this.messageData[0] = jObject.getLong("selection");
 				break;
 			default:
+				System.out.println("default wird aufgerufen");
 				break;
 		}
 	}
@@ -85,7 +91,7 @@ public class SocketJSONMessage{
 				jObject.put("playerID", this.messageData[0]);
 				break;
 			case 5: //CatalogChange
-				System.out.println("CatalogChange 2: " + this.messageData[0]);
+				System.out.println("CatalogChange 2:" + this.messageData[0]);
 				jObject.put("catalogName", this.messageData[0]);
 				break;
 			case 9://Question
@@ -99,7 +105,7 @@ public class SocketJSONMessage{
 				break;
 			case 11://QuestionResult
 				System.out.println("QuestionResult");
-				jObject.put("timeOut", this.messageData[0]);
+				jObject.put("timedOut", this.messageData[0]);
 				jObject.put("correct", this.messageData[1]);
 				break;
 			case 12: //GameOver

@@ -219,6 +219,8 @@ function sendWSMessage(type){
 					messageType : messageType,
 					catalogName : catalogName
 				});
+				console.log(catalogName);
+				break;
 			case 8: // QuestionRequest
 				// QuestionRequest with type
 				console.log("send MessageType 8");
@@ -267,6 +269,7 @@ function processSuccessfulLogin(){
 	} else {
 		// kein Spielleiter
 		buttonStart.textContent = "Warte auf Spielstart ...";
+		buttonStart.disabled = true;
 	}
 }
 
@@ -351,17 +354,19 @@ function showGameDiv(){
 	var questDiv = document.createElement("div");
 	questDiv.id = "questDiv";
 	
+	/*
 	// Überschrift Fragenkatalog
-	var title = document.createElement("h3");
+	var title = document.createElement("h4");
 	title.id = "GameDivTitle";
 	title.textContent = "Fragekatalog: " + activeCatalog;
+	*/
 	
 	// div für Frage
 	var question = document.createElement("div");
 	question.id = "QuestionText";
-	question.style.fontSize = "16px";
+	question.style.fontSize = "1.7em";
 	
-	questDiv.appendChild(title);
+	//questDiv.appendChild(title);
 	questDiv.appendChild(question);
 
 	var answers = [];
